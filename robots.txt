@@ -1,0 +1,29 @@
+# Qumont Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin and backend areas
+Disallow: /admin-dashboard.html
+Disallow: /admin.html
+Disallow: /backend/
+Disallow: /admin-dashboard.js
+
+# Disallow checkout and cart pages from indexing
+Disallow: /checkout.html
+Disallow: /*?cart=*
+Disallow: /*?checkout=*
+
+# Allow important resources
+Allow: /Qumont.css
+Allow: /Q.js
+Allow: /images/
+Allow: /uploads/
+
+# Sitemap location
+Sitemap: https://www.qumont.com/sitemap.xml
+
+# Crawl delay (optional, adjust as needed)
+Crawl-delay: 1
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Qumont - Customer Support</title>
+    
+    <link rel="stylesheet" href="Qumont.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="Homepage.html">Qumont</a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="Homepage.html">Home</a></li>
+            <li><a href="index.html#products">Shop</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li> </ul>
+
+        <div class="nav-icons">
+            <a href="#" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#" class="icon cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span class="close-cart" id="closeCart"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="cart-body">
+            <p class="empty-msg" style="text-align:center; color:#888; margin-top:20px;">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total"><span>Subtotal:</span><span id="cartTotal">₹0.00</span></div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <header class="page-header">
+        <h1>Get in Touch</h1>
+        <p>We are here to help you create your perfect sanctuary.</p>
+    </header>
+
+    <section class="contact-section">
+        <div class="contact-container">
+            
+            <div class="contact-info">
+                <h2>Customer Service</h2>
+                <p>Have a question about shipping, installation, or returns? Our team is available Monday through Friday to assist you.</p>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Headquarters</h4>
+                        <p>123 Luxury Lane, Design District<br>Mumbai, India 400001</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>support@qumont.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select>
+                            <option>Order Status</option>
+                            <option>Product Inquiry</option>
+                            <option>Returns & Exchanges</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-logo">Qumont</h3>
+                <p>Redefining luxury for your personal sanctuary.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="Homepage.html">Home</a></li>
+                    <li><a href="index.html#products">Shop Collection</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Qumont. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="Q.js"></script>
+</body>
+</html>

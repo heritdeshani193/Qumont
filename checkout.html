@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Qumont</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Qumont.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="analytics.js"></script>
+</head>
+<body>
+
+    <header class="checkout-header">
+        <div class="logo">
+            <a href="Homepage.html">Qumont</a>
+        </div>
+        <div class="secure-icon">
+            <i class="fa-solid fa-lock"></i> Secure Checkout
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        
+        <div class="checkout-form-section">
+            <h2>Billing Details</h2>
+            <form class="billing-form">
+                
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="name@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Shipping Address</h3>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>First Name</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group half">
+                            <label>Last Name</label>
+                            <input type="text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" placeholder="Flat, House no., Building, Company, Apartment" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>City</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group half">
+                            <label>PIN Code</label>
+                            <input type="text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+91" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-options">
+                        <div class="payment-option selected">
+                            <input type="radio" name="payment" id="card" checked>
+                            <label for="card"><i class="fa-regular fa-credit-card"></i> Credit/Debit Card</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" name="payment" id="upi">
+                            <label for="upi"><i class="fa-solid fa-mobile-screen-button"></i> UPI / Netbanking</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" name="payment" id="cod">
+                            <label for="cod"><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="place-order-btn" onclick="alert('Order Placed Successfully! (This is a demo)')">Complete Order</button>
+            </form>
+        </div>
+
+        <div class="order-summary-section">
+            <div class="summary-card">
+                <h3>Your Order</h3>
+                <div id="checkoutItems">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="checkoutSubtotal">₹0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="checkoutShipping">Free</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="checkoutTotal">₹0.00</span>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to format price in Indian Rupees
+        function formatPrice(price) {
+            const formattedPrice = parseFloat(price).toFixed(2);
+            const parts = formattedPrice.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return '₹' + parts.join('.');
+        }
+
+        // Load cart from localStorage and display on checkout page
+        function loadCheckoutCart() {
+            const savedCart = localStorage.getItem('qumont_cart');
+            const checkoutItems = document.getElementById('checkoutItems');
+            const checkoutSubtotal = document.getElementById('checkoutSubtotal');
+            const checkoutTotal = document.getElementById('checkoutTotal');
+            
+            if (!savedCart) {
+                checkoutItems.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Your cart is empty. <a href="Homepage.html">Continue Shopping</a></p>';
+                checkoutSubtotal.textContent = formatPrice(0);
+                checkoutTotal.textContent = formatPrice(0);
+                return;
+            }
+            
+            const cart = JSON.parse(savedCart);
+            
+            if (cart.length === 0) {
+                checkoutItems.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Your cart is empty. <a href="Homepage.html">Continue Shopping</a></p>';
+                checkoutSubtotal.textContent = formatPrice(0);
+                checkoutTotal.textContent = formatPrice(0);
+                return;
+            }
+            
+            let itemsHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                itemsHTML += `
+                    <div class="summary-item">
+                        <div class="item-info">
+                            <img src="${item.image || 'https://via.placeholder.com/60?text=Product'}" alt="${item.name}">
+                            <div>
+                                <h4>${item.name}</h4>
+                                <p>Qty: ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <div class="item-price">${formatPrice(itemTotal)}</div>
+                    </div>
+                `;
+            });
+            
+            checkoutItems.innerHTML = itemsHTML;
+            checkoutSubtotal.textContent = formatPrice(subtotal);
+            checkoutTotal.textContent = formatPrice(subtotal);
+        }
+
+        // Payment option selection
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCheckoutCart();
+            
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) radio.checked = true;
+                });
+            });
+        });
+
+        // Handle place order button
+        document.addEventListener('DOMContentLoaded', function() {
+            const placeOrderBtn = document.querySelector('.place-order-btn');
+            if (placeOrderBtn) {
+                placeOrderBtn.addEventListener('click', function() {
+                    const savedCart = localStorage.getItem('qumont_cart');
+                    if (!savedCart || JSON.parse(savedCart).length === 0) {
+                        alert('Your cart is empty. Please add items to your cart first.');
+                        window.location.href = 'Homepage.html';
+                        return;
+                    }
+                    
+                    const cart = JSON.parse(savedCart);
+                    const subtotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+                    
+                    // Track purchase event
+                    if (window.QumontAnalytics) {
+                        const order = {
+                            id: 'ORDER-' + Date.now(),
+                            order_number: 'ORDER-' + Date.now(),
+                            items: cart,
+                            total: subtotal,
+                            tax: 0,
+                            shipping: subtotal >= 999 ? 0 : 99
+                        };
+                        window.QumontAnalytics.trackPurchase(order);
+                    }
+                    
+                    // Clear cart after order
+                    localStorage.removeItem('qumont_cart');
+                    
+                    alert('Order Placed Successfully! Thank you for your purchase.');
+                    window.location.href = 'Homepage.html';
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Qumont</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Qumont.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="Homepage.html">Qumont</a>
+            </div>
+    
+            <ul class="nav-links">
+                <li><a href="Homepage.html">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+    
+            <div class="nav-icons">
+                <a href="#" class="icon"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" class="icon cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container-detail">
+            <div class="product-detail-wrapper">
+                
+                <!-- Left: Image Gallery -->
+                <div class="product-images">
+                    <div class="main-image-container">
+                        <img id="mainImage" src="" alt="Product" class="main-image">
+                        <button class="image-zoom-btn" onclick="toggleZoom()">
+                            <i class="fa-solid fa-search-plus"></i>
+                        </button>
+                    </div>
+                    <div class="thumbnail-gallery" id="thumbnailGallery">
+                        <!-- Thumbnails will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Product Info -->
+                <div class="product-details">
+                    <h1 id="productName" class="product-title">Product Name</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="rating-text">(4.8) 127 Reviews</span>
+                    </div>
+                    
+                    <div class="product-price-large" id="productPrice">₹0.00</div>
+                    
+                    <div class="product-description-short" id="productShortDesc">
+                        <!-- Short description will be populated by JS -->
+                    </div>
+
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <i class="fa-solid fa-truck"></i>
+                            <span>Free Shipping on orders over ₹999</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>2-Year Warranty</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>7-Day Return Policy</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label>Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus" onclick="decreaseQuantity()">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input type="number" id="quantityInput" value="1" min="1" max="10" readonly>
+                            <button class="qty-btn plus" onclick="increaseQuantity()">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn-detail" onclick="addToCartFromDetail()">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            Add to Cart
+                        </button>
+                        <button class="buy-now-btn" onclick="buyNow()">
+                            <i class="fa-solid fa-bolt"></i>
+                            Buy Now
+                        </button>
+                    </div>
+
+                    <div class="product-meta">
+                        <p><strong>SKU:</strong> <span id="productSKU">QM-001</span></p>
+                        <p><strong>Category:</strong> <span id="productCategory">Bathroom Accessories</span></p>
+                        <p><strong>Availability:</strong> <span class="in-stock">In Stock</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Description Tabs -->
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('description')">Description</button>
+                    <button class="tab-btn" onclick="switchTab('specifications')">Specifications</button>
+                    <button class="tab-btn" onclick="switchTab('reviews')">Reviews</button>
+                </div>
+
+                <div class="tab-content active" id="descriptionTab">
+                    <div id="detailedDescription">
+                        <!-- Detailed description will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="specificationsTab">
+                    <table class="specifications-table" id="specificationsTable">
+                        <!-- Specifications will be populated by JS -->
+                    </table>
+                </div>
+
+                <div class="tab-content" id="reviewsTab">
+                    <div class="reviews-section">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-name">Sarah Johnson</div>
+                                <div class="review-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="review-date">2 days ago</div>
+                            </div>
+                            <p class="review-text">Absolutely love this product! The quality is exceptional and it looks stunning in my bathroom. Highly recommended!</p>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-name">Michael Chen</div>
+                                <div class="review-stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <div class="review-date">1 week ago</div>
+                            </div>
+                            <p class="review-text">Great quality and fast shipping. The product exceeded my expectations. Will definitely order again!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar (same as homepage) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span class="close-cart" id="closeCart">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+        </div>
+        <div class="cart-body">
+            <p class="empty-msg" style="text-align:center; color:#888; margin-top:20px;">
+                Your cart is currently empty.
+            </p>
+        </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Subtotal:</span>
+                <span id="cartTotal">₹0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutButton" onclick="goToCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <script src="Q.js"></script>
+    <script src="product-detail.js"></script>
+</body>
+</html>

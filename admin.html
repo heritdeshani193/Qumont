@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qumont Admin | Inventory Control</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-panel { max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; color: #666; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .update-btn { background: #b38b59; color: white; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body style="background: #f0f0f0;">
+
+    <div class="admin-panel">
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 30px;">Qumont Inventory Manager</h2>
+        
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="p-name" placeholder="e.g. Matte Black Tap">
+        </div>
+
+        <div class="form-group">
+            <label>Current Stock</label>
+            <input type="number" id="p-stock">
+        </div>
+
+        <div class="form-group">
+            <label>Current Price ($)</label>
+            <input type="number" id="p-price">
+        </div>
+
+        <button class="update-btn" onclick="updateLiveStore()">Update Live Store</button>
+        <p id="msg" style="color: green; font-size: 12px; margin-top: 10px; text-align: center; display: none;">Store Updated Successfully!</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Use the same config as your main site
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            databaseURL: "https://qumont-store.firebaseio.com",
+            projectId: "qumont-store",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.updateLiveStore = function() {
+            const name = document.getElementById('p-name').value;
+            const stock = document.getElementById('p-stock').value;
+            const price = document.getElementById('p-price').value;
+
+            // Push updates to the specific product path
+            update(ref(db, 'products/tap-01'), {
+                name: name,
+                stock: parseInt(stock),
+                price: parseFloat(price)
+            }).then(() => {
+                document.getElementById('msg').style.display = 'block';
+                setTimeout(() => { document.getElementById('msg').style.display = 'none'; }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
