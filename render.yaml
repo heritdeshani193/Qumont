@@ -1,0 +1,32 @@
+services:
+  # This creates your Node.js Backend
+  - type: web
+    name: qumont-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: qumont-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: qumont-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: qumont-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: qumont-db
+          property: database
+
+databases:
+  # This creates your MySQL Database
+  - name: qumont-db
+    databaseName: qumont_db
+    user: qumont_user
+    plan: free
